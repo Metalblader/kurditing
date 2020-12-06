@@ -11,4 +11,6 @@
     <color name="colorPurpleDark">#742FD0</color>
     <color name="colorPurpleSoft">#B481F8</color>
     <color name="colorPurpleIcon">#D1C9DB</color>
+    <color name="colorYellow">#FFC700</color>
+    <color name="colorGrey">#C4C2C2</color>
 </resources>
