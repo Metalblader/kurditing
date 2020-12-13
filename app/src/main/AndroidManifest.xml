@@ -9,15 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kurditing.NoActionBar">
-        <activity android:name=".AccountActivity"></activity>
+        <activity android:name=".MyCourseActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity android:name=".SignInActivity">
+<!--             <intent-filter>-->
+<!--                 <action android:name="android.intent.action.MAIN" />-->
+<!--                 <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+        </activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".AccountActivity" />
         <activity android:name=".DescriptionActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".SplashScreenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".HomeActivity" android:windowSoftInputMode="adjustPan">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity android:name=".SplashScreenActivity">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
     </application>
 
