@@ -92,6 +92,7 @@
         android:text="Nonton Cuplikan"
         android:textColor="@color/colorPurpleSoft"
         android:textStyle="bold"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
