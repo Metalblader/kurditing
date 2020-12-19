@@ -8,11 +8,11 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -21,15 +21,14 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:text="Andrew Blue"
         android:textColor="@color/colorPurpleDark"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <ImageView
         android:id="@+id/imageView11"
@@ -43,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
         app:srcCompat="@drawable/ic_border_account" />
 
     <ImageView
@@ -232,9 +231,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/ic_check" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="295dp"
+        android:layout_height="44dp"
+        android:drawableLeft="@drawable/ic_gift"
+        android:drawableRight="@drawable/ic_next"
+        android:fontFamily="@font/poppins"
+        android:text="Referal"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPurpleBlack"
+        app:backgroundTint="#FFFFFF"
+        tools:layout_editor_absoluteX="57dp"
+        tools:layout_editor_absoluteY="454dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

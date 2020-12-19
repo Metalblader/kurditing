@@ -21,4 +21,5 @@
     <color name="colorGreySearchText">#AAAAAA</color>
     <color name="colorGreySearchBackground">#EEEFF2</color>
     <color name="colorGreySearchBorder">#E1E3EA</color>
+    <color name="colorRed">#FF0000</color>
 </resources>
