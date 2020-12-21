@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".home.dashboard.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_continue_watching"
@@ -45,15 +45,19 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Perdalam Keahlian, Hasilkan Lebih banyak uang"
         android:textColor="@color/colorPurpleBlack"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
@@ -92,10 +96,23 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/poppins"
-        android:text="Halo Alex,"
+        android:text="Halo "
         android:textColor="@color/colorPurpleBlack"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_nama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins"
+        android:text=" "
+        android:textColor="@color/colorPurpleBlack"
+        app:layout_constraintStart_toEndOf="@+id/textView32"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Halo Alex," />
+        tools:text="Wilson Angga" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

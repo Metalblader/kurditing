@@ -1,12 +1,17 @@
-package com.example.kurditing
+package com.example.kurditing.home.dashboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kurditing.R
+import com.example.kurditing.model.Course
 import com.example.kurditing.utils.Preferences
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +27,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var preferences: Preferences
     private lateinit var mDatabase : DatabaseReference
+
+    private var dataList = ArrayList<Course>()
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -59,5 +66,49 @@ class HomeFragment : Fragment() {
                         putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        preferences = Preferences(requireActivity().applicationContext)
+        mDatabase = FirebaseDatabase.getInstance().getReference("Course")
+
+        tv_nama.setText(preferences.getValues("nama"))
+
+        rv_best_seller.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        rv_popular.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        rv_continue_watching.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        getData()
+    }
+
+    private fun getData() {
+        mDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(context, ""+databaseError.message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataList.clear()
+                for (getdataSnapshot in dataSnapshot.children){
+                    var course = getdataSnapshot.getValue(Course::class.java)
+                    dataList.add(course!!)
+                }
+
+                rv_best_seller.adapter = BestSellerAdapter(dataList){
+
+                }
+
+//                rv_popular.adapter = PopularAdapter(dataList){
+//
+//                }
+//
+//                rv_continue_watching.adapter = ContinueWatchingAdapter(dataList){
+//
+//                }
+            }
+
+        })
     }
 }

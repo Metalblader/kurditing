@@ -24,7 +24,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".AccountActivity" />
         <activity android:name=".DescriptionActivity" />
-        <activity android:name=".HomeActivity" android:windowSoftInputMode="adjustPan">
+        <activity android:name=".home.HomeActivity" android:windowSoftInputMode="adjustPan">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
