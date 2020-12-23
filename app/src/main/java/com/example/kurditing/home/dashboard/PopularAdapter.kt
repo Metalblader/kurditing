@@ -11,9 +11,9 @@ import com.bumptech.glide.Glide
 import com.example.kurditing.R
 import com.example.kurditing.model.Course
 
-class BestSellerAdapter(private var data: List<Course>,
-                        private var listener:(Course) -> Unit)
-    : RecyclerView.Adapter<BestSellerAdapter.ViewHolder>() {
+class PopularAdapter(private var data: List<Course>,
+                     private var listener:(Course) -> Unit)
+    : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
 
     lateinit var contextAdapter: Context
 
@@ -21,16 +21,16 @@ class BestSellerAdapter(private var data: List<Course>,
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BestSellerAdapter.ViewHolder {
+    ): PopularAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         contextAdapter = parent.context
-        val inflatedView = layoutInflater.inflate(R.layout.row_item_best_seller, parent, false)
+        val inflatedView = layoutInflater.inflate(R.layout.row_item_popular, parent, false)
         return ViewHolder(inflatedView)
     }
 
     override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: BestSellerAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PopularAdapter.ViewHolder, position: Int) {
         holder.bindItem(data[position], listener, contextAdapter)
     }
 

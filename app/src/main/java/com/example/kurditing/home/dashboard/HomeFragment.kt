@@ -100,9 +100,9 @@ class HomeFragment : Fragment() {
 
                 }
 
-//                rv_popular.adapter = PopularAdapter(dataList){
-//
-//                }
+                rv_popular.adapter = PopularAdapter(dataList){
+
+                }
 //
 //                rv_continue_watching.adapter = ContinueWatchingAdapter(dataList){
 //
