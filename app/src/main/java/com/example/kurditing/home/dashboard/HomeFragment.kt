@@ -1,5 +1,6 @@
 package com.example.kurditing.home.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kurditing.DescriptionActivity
 import com.example.kurditing.R
 import com.example.kurditing.model.Course
 import com.example.kurditing.utils.Preferences
@@ -97,11 +99,13 @@ class HomeFragment : Fragment() {
                 }
 
                 rv_best_seller.adapter = BestSellerAdapter(dataList){
-
+                    var intent = Intent(context, DescriptionActivity::class.java).putExtra("data",it)
+                    startActivity(intent)
                 }
 
                 rv_popular.adapter = PopularAdapter(dataList){
-
+                    var intent = Intent(context, DescriptionActivity::class.java).putExtra("data",it)
+                    startActivity(intent)
                 }
 //
 //                rv_continue_watching.adapter = ContinueWatchingAdapter(dataList){
