@@ -18,14 +18,23 @@
             android:layout_height="match_parent"
             tools:context=".DescriptionActivity">
 
-            <ImageView
-                android:id="@+id/iv_poster"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="228dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="-29dp"
+                tools:layout_editor_absoluteY="0dp"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/iv_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="228dp"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="4dp"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv_title"
@@ -33,13 +42,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/colorPurpleBlack"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_poster"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
                 tools:text="Trik Melesatkan Omset" />
 
             <TextView
@@ -48,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:fontFamily="@font/poppins"
@@ -60,36 +69,18 @@
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/colorPurpleBlack"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_desc"
-                tools:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
-
-            <TextView
                 android:id="@+id/tv_harga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/colorPurpleBlack"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/tv_desc"
                 tools:text="IDR 199.000" />
 
             <TextView
@@ -123,7 +114,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="28dp"
                 android:background="@drawable/ic_border_highlight"
                 android:paddingLeft="5dp"
                 android:paddingTop="1dp"
@@ -133,7 +123,7 @@
                 android:textColor="@color/colorPurpleButton"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/tv_harga"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintTop_toTopOf="@+id/tv_harga" />
 
             <ImageView
                 android:id="@+id/imageView10"

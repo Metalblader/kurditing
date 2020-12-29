@@ -9,5 +9,7 @@ data class Course (
     var desc:String ? = "",
     var judul:String ? = "",
     var owner:String ? = "",
-    var poster:String ? = ""
+    var poster:String ? = "",
+    var harga:String ? = "",
+    var rating:String ? = ""
 ) : Parcelable

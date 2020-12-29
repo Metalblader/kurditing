@@ -27,12 +27,14 @@ class DescriptionActivity : AppCompatActivity() {
 
         tv_title.text = data?.judul
         tv_desc.text = data?.desc
+        tv_harga.text = "IDR "+data?.harga
+        tv_rating.text = data?.rating
+
 
         Glide.with(this)
                 .load(data?.poster)
                 .into(iv_poster)
 
-        getData()
     }
 
     private fun getData() {

@@ -80,7 +80,8 @@
         android:text="@string/syarat_ketentuan"
         android:textColor="@color/colorPurpleBlack"
         app:layout_constraintStart_toEndOf="@+id/imageView15"
-        tools:layout_editor_absoluteY="298dp" />
+        tools:layout_editor_absoluteY="298dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView28"
@@ -92,7 +93,8 @@
         android:text="@string/tentang_kurditing"
         android:textColor="@color/colorPurpleBlack"
         app:layout_constraintStart_toEndOf="@+id/imageView19"
-        tools:layout_editor_absoluteY="357dp" />
+        tools:layout_editor_absoluteY="357dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView29"
@@ -104,7 +106,8 @@
         android:text="Keluar"
         android:textColor="@color/colorPurpleBlack"
         app:layout_constraintStart_toEndOf="@+id/imageView22"
-        tools:layout_editor_absoluteY="428dp" />
+        tools:layout_editor_absoluteY="428dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView14"
@@ -125,7 +128,8 @@
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:srcCompat="@drawable/ic_next"
-        tools:layout_editor_absoluteY="296dp" />
+        tools:layout_editor_absoluteY="296dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView20"
@@ -135,7 +139,8 @@
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:srcCompat="@drawable/ic_next"
-        tools:layout_editor_absoluteY="357dp" />
+        tools:layout_editor_absoluteY="357dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView23"
@@ -145,7 +150,8 @@
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:srcCompat="@drawable/ic_next"
-        tools:layout_editor_absoluteY="428dp" />
+        tools:layout_editor_absoluteY="428dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -219,17 +225,21 @@
 
             <Button
                 android:id="@+id/button6"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:drawableLeft="@drawable/ic_gift"
-                android:paddingLeft="40dp"
                 android:text="Referal"
+                android:textAlignment="textStart"
                 android:textColor="@color/colorPurpleBlack"
+                android:textAllCaps="false"
+                android:paddingLeft="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center_vertical"
+                tools:ignore="RtlCompat" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
