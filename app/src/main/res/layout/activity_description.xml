@@ -31,8 +31,45 @@
                     android:layout_width="match_parent"
                     android:layout_height="228dp"
                     tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="4dp"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    tools:srcCompat="@drawable/ic_course_sample" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="@+id/iv_poster"
+                    app:layout_constraintTop_toTopOf="@+id/iv_poster"
+                    app:srcCompat="@drawable/ic_arrow_white" />
+
+                <TextView
+                    android:id="@+id/tv_owner_poster"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.458"
+                    app:layout_constraintStart_toStartOf="@+id/iv_poster"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:text="Gilbert Herlambang" />
+
+                <TextView
+                    android:id="@+id/tv_prof_poster"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Marketer Fb Profesional Dunia"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_owner_poster" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

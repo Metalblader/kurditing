@@ -29,6 +29,7 @@ class DescriptionActivity : AppCompatActivity() {
         tv_desc.text = data?.desc
         tv_harga.text = "IDR "+data?.harga
         tv_rating.text = data?.rating
+        tv_owner_poster.text = data?.owner
 
 
         Glide.with(this)
