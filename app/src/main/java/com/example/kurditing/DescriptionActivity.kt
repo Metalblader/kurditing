@@ -23,7 +23,7 @@ class DescriptionActivity : AppCompatActivity() {
         val data = intent.getParcelableExtra<Course>("data")
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Course")
-                .child(data?.judul.toString())
+//                .child(data?.judul.toString())
 
         tv_title.text = data?.judul
         tv_desc.text = data?.desc

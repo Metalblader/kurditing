@@ -76,7 +76,9 @@ class HomeFragment : Fragment() {
         preferences = Preferences(requireActivity().applicationContext)
         mDatabase = FirebaseDatabase.getInstance().getReference("Course")
 
-        tv_nama.setText(preferences.getValues("nama"))
+        Toast.makeText(context, "Nama Home: " + preferences.getValues("nama"), Toast.LENGTH_LONG).show()
+
+        tv_nama.text = preferences.getValues("nama")
 
         rv_best_seller.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rv_popular.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

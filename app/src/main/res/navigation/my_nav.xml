@@ -17,9 +17,9 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/courseFragment"
-        android:name="com.example.kurditing.CourseFragment"
+        android:name="com.example.kurditing.mycourse.CourseFragment"
         android:label="fragment_course"
-        tools:layout="@layout/fragment_course" />
+        tools:layout="@layout/fragment_course"/>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.kurditing.AccountFragment"
