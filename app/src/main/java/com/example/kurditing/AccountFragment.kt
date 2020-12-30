@@ -1,10 +1,12 @@
 package com.example.kurditing
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_account.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +28,15 @@ class AccountFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        btn_terms.setOnClickListener(){
+            var intent = Intent(context, TermsActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -56,4 +67,5 @@ class AccountFragment : Fragment() {
                 }
             }
     }
+
 }

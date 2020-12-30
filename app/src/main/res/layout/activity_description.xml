@@ -34,7 +34,7 @@
                     tools:srcCompat="@drawable/ic_course_sample" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -42,7 +42,8 @@
                     android:layout_marginTop="24dp"
                     app:layout_constraintStart_toStartOf="@+id/iv_poster"
                     app:layout_constraintTop_toTopOf="@+id/iv_poster"
-                    app:srcCompat="@drawable/ic_arrow_white" />
+                    app:srcCompat="@drawable/ic_arrow_white"
+                    android:onClick="backHome"/>
 
                 <TextView
                     android:id="@+id/tv_owner_poster"
@@ -56,7 +57,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.458"
                     app:layout_constraintStart_toStartOf="@+id/iv_poster"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_back"
                     tools:text="Gilbert Herlambang" />
 
                 <TextView
@@ -130,7 +131,7 @@
                 android:layout_marginTop="4dp"
                 android:textColor="@color/colorYellow"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imageView10"
+                app:layout_constraintStart_toEndOf="@+id/iv_back10"
                 app:layout_constraintTop_toBottomOf="@+id/tv_harga"
                 tools:text="4.9" />
 
@@ -164,7 +165,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_harga" />
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/iv_back10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -206,7 +207,7 @@
             android:text="Ambil Kelas"
             android:textAllCaps="false"
             android:textStyle="bold"
-            app:backgroundTint="@null" />
+            app:backgroundTint="@null"/>
 
         <Button
             android:id="@+id/button3"
