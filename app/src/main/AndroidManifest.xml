@@ -46,6 +46,8 @@
 <!--             </intent-filter>-->
         </activity>
         <activity android:name=".TermsActivity"/>
+        <activity android:name=".AboutActivity"/>
+        <activity android:name=".ReferalActivity"/>
     </application>
 
 </manifest>

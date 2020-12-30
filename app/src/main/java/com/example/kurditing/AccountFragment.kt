@@ -6,7 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.kurditing.utils.Preferences
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_account.*
+import kotlinx.android.synthetic.main.fragment_account.tv_nama
+import kotlinx.android.synthetic.main.fragment_home.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +29,8 @@ class AccountFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var preferences: Preferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,10 +42,30 @@ class AccountFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        preferences = Preferences(requireActivity().applicationContext)
+
+        tv_nama.text = preferences.getValues("nama")
+
+        btn_referal.setOnClickListener(){
+            var intent = Intent(context, ReferalActivity::class.java)
+            startActivity(intent)
+        }
+
         btn_terms.setOnClickListener(){
             var intent = Intent(context, TermsActivity::class.java)
             startActivity(intent)
         }
+
+        btn_about.setOnClickListener(){
+            var intent = Intent(context, AboutActivity::class.java)
+            startActivity(intent)
+        }
+
+        Glide.with(this)
+                .load(preferences.getValues("photo"))
+                .apply(RequestOptions.circleCropTransform())
+                .into(iv_photo)
     }
 
     override fun onCreateView(
