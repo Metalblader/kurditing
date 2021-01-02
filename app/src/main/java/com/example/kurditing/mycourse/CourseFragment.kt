@@ -89,9 +89,9 @@ class CourseFragment : Fragment() {
                 }
 
                 rv_my_course.adapter = CourseAdapter(dataList) {
-//                    val intent = Intent(context,
-//                        CourseDetailActivity::class.java).putExtra("data", it)
-//                    startActivity(intent)
+                    val intent = Intent(context,
+                        MyCourseDescriptionActivity::class.java).putExtra("data", it)
+                    startActivity(intent)
                 }
             }
 
