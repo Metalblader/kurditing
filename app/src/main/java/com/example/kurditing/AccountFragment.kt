@@ -63,7 +63,7 @@ class AccountFragment : Fragment() {
         }
 
         Glide.with(this)
-                .load(preferences.getValues("photo"))
+                .load("https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fpejabat.jpg?alt=media&token=f00e8397-049f-4c86-89d3-279a245c8b8e")
                 .apply(RequestOptions.circleCropTransform())
                 .into(iv_photo)
     }

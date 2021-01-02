@@ -1,6 +1,7 @@
 package com.example.kurditing
 
 import android.app.DownloadManager
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,9 @@ import com.example.kurditing.model.Course
 import com.example.kurditing.model.Detail
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_description.*
+import kotlinx.android.synthetic.main.activity_description.btn_ambil_kelas
+import kotlinx.android.synthetic.main.activity_description.tv_harga
+import kotlinx.android.synthetic.main.activity_payment.*
 
 class DescriptionActivity : AppCompatActivity() {
 
@@ -37,6 +41,14 @@ class DescriptionActivity : AppCompatActivity() {
                 .load(data?.poster)
                 .into(iv_poster)
 
+        btn_ambil_kelas.setOnClickListener(){
+            var intent = Intent(this@DescriptionActivity,PaymentActivity::class.java)
+            intent.putExtra("judul",tv_title.text.toString())
+            intent.putExtra("owner",tv_owner_poster.text.toString())
+            intent.putExtra("harga", tv_harga.text.toString())
+            startActivity(intent)
+        }
+
     }
 
     private fun getData() {
@@ -57,4 +69,5 @@ class DescriptionActivity : AppCompatActivity() {
     fun backHome(view: View) {
         finish();
     }
+
 }
