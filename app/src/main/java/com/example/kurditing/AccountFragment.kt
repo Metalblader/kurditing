@@ -62,6 +62,12 @@ class AccountFragment : Fragment() {
             startActivity(intent)
         }
 
+        btn_logout.setOnClickListener(){
+            var intent = Intent(context, SignInActivity::class.java)
+            startActivity(intent)
+            getActivity()?.finish();
+        }
+
         Glide.with(this)
                 .load("https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fpejabat.jpg?alt=media&token=f00e8397-049f-4c86-89d3-279a245c8b8e")
                 .apply(RequestOptions.circleCropTransform())

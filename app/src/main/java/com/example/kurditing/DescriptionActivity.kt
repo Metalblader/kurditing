@@ -49,6 +49,11 @@ class DescriptionActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        btn_nonton_cuplikan.setOnClickListener(){
+            var intent = Intent(this@DescriptionActivity, VideoPlayingActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun getData() {
@@ -69,5 +74,6 @@ class DescriptionActivity : AppCompatActivity() {
     fun backHome(view: View) {
         finish();
     }
+
 
 }

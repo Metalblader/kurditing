@@ -34,8 +34,8 @@
 
     <ImageView
         android:id="@+id/imageView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="117dp"
+        android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -54,5 +54,22 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Kurditing adalah aplikasi smart  yang memberikan Anda kemudahan dalam bertransaksi (Kurditing Cash) dan juga kesempatan yang lebih besar untuk mengumpulkan poin di banyak tempat (Kurditing Points).\n\nKurditing, aplikasi pembayaran Serba Bisa, Simpel, Instan dan Aman yang siap buat segala transaksi finansial Anda jadi lebih menyenangkan.\n\nKurditing, aplikasi pembayaran Serba Bisa, Simpel, Instan dan Aman yang siap buat segala transaksi finansial Anda jadi lebih menyenangkan.\n\nKurditing, aplikasi pembayaran Serba Bisa, Simpel, Instan dan Aman yang siap buat segala transaksi finansial Anda jadi lebih menyenangkan.\n\nKurditing, aplikasi pembayaran Serba Bisa, Simpel, Instan dan Aman yang siap buat segala transaksi finansial Anda jadi lebih menyenangkan.\n\nKurditing, aplikasi pembayaran Serba Bisa, Simpel, Instan dan Aman yang siap buat segala transaksi finansial Anda jadi lebih menyenangkan.\n\nKurditing, aplikasi pembayaran Serba Bisa, Simpel, Instan dan Aman yang siap buat segala transaksi finansial Anda jadi lebih menyenangkan.\n\nKurditing, aplikasi pembayaran Serba Bisa, Simpel, Instan dan Aman yang siap buat segala transaksi finansial Anda jadi lebih menyenangkan."
+        android:textColor="@color/colorPurpleBlack"
+        android:justificationMode="inter_word"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
