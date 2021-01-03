@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.kurditing.utils.Preferences
@@ -63,9 +66,28 @@ class AccountFragment : Fragment() {
         }
 
         btn_logout.setOnClickListener(){
-            var intent = Intent(context, SignInActivity::class.java)
-            startActivity(intent)
-            getActivity()?.finish();
+            var MyLayout = layoutInflater.inflate(R.layout.activity_logout_dialog,null)
+            val myDialogBuilder = context?.let { it1 ->
+                AlertDialog.Builder(it1).apply {
+                    setView(MyLayout)
+                }
+            }
+            var myDialog : AlertDialog = myDialogBuilder!!.create()
+            var cancel = MyLayout.findViewById<ImageView>(R.id.iv_cancel)
+            var batal = MyLayout.findViewById<Button>(R.id.btn_batal)
+            var logout = MyLayout.findViewById<Button>(R.id.btn_logout)
+            cancel.setOnClickListener(){
+                myDialog.cancel()
+            }
+            batal.setOnClickListener(){
+                myDialog.cancel()
+            }
+            logout.setOnClickListener(){
+                var intent = Intent(context, SignInActivity::class.java)
+                startActivity(intent)
+                getActivity()?.finish();
+            }
+            myDialog.show()
         }
 
         Glide.with(this)

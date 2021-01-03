@@ -194,7 +194,7 @@
             android:background="?android:attr/listDivider" />
 
         <Button
-            android:id="@+id/btn_ambil_kelas"
+            android:id="@+id/btn_ajak_teman"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"

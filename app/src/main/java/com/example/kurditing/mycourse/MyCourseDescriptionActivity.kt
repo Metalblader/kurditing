@@ -3,6 +3,7 @@ package com.example.kurditing.mycourse
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -44,6 +45,7 @@ class MyCourseDescriptionActivity : AppCompatActivity() {
         getData()
     }
 
+
     private fun getData() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
@@ -60,7 +62,12 @@ class MyCourseDescriptionActivity : AppCompatActivity() {
                     val intent = Intent(this@MyCourseDescriptionActivity, VideoPlayingActivity::class.java)
                     startActivity(intent)
                 }
+
             }
         })
+    }
+
+    fun backMycourse(view: View) {
+        finish();
     }
 }

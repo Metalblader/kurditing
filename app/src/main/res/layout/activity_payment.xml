@@ -288,7 +288,7 @@
             android:background="?android:attr/listDivider" />
 
         <Button
-            android:id="@+id/btn_ambil_kelas"
+            android:id="@+id/btn_ajak_teman"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -303,6 +303,7 @@
             android:textAllCaps="false"
             android:textStyle="bold"
             app:backgroundTint="@null"
+            android:onClick="getCustomDialog"
             tools:ignore="MissingConstraints" />
 
     </LinearLayout>

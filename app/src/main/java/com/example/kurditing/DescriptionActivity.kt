@@ -1,20 +1,17 @@
 package com.example.kurditing
 
-import android.app.DownloadManager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.kurditing.model.Course
 import com.example.kurditing.model.Detail
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_description.*
-import kotlinx.android.synthetic.main.activity_description.btn_ambil_kelas
+import kotlinx.android.synthetic.main.activity_description.btn_ajak_teman
 import kotlinx.android.synthetic.main.activity_description.tv_harga
-import kotlinx.android.synthetic.main.activity_payment.*
 
 class DescriptionActivity : AppCompatActivity() {
 
@@ -41,7 +38,7 @@ class DescriptionActivity : AppCompatActivity() {
                 .load(data?.poster)
                 .into(iv_poster)
 
-        btn_ambil_kelas.setOnClickListener(){
+        btn_ajak_teman.setOnClickListener(){
             var intent = Intent(this@DescriptionActivity,PaymentActivity::class.java)
             intent.putExtra("judul",tv_title.text.toString())
             intent.putExtra("owner",tv_owner_poster.text.toString())
