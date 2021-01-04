@@ -11,5 +11,7 @@ data class Course (
     var owner:String ? = "",
     var poster:String ? = "",
     var harga:String ? = "",
-    var rating:String ? = ""
+    var rating:String ? = "",
+    var owner_poster:String ? = ""
+//    var list:ArrayList<Course> ? = ArrayList()
 ) : Parcelable

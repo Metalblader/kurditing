@@ -3,15 +3,19 @@ package com.example.kurditing
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.kurditing.model.Course
 import com.example.kurditing.model.Detail
+import com.example.kurditing.model.SubCourse
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_description.*
-import kotlinx.android.synthetic.main.activity_description.btn_ajak_teman
+import kotlinx.android.synthetic.main.activity_description.btn_ambil_kelas
+import kotlinx.android.synthetic.main.activity_description.iv_poster
 import kotlinx.android.synthetic.main.activity_description.tv_harga
+import kotlinx.android.synthetic.main.activity_payment.*
 
 class DescriptionActivity : AppCompatActivity() {
 
@@ -38,11 +42,36 @@ class DescriptionActivity : AppCompatActivity() {
                 .load(data?.poster)
                 .into(iv_poster)
 
-        btn_ajak_teman.setOnClickListener(){
+        btn_ambil_kelas.setOnClickListener(){
             var intent = Intent(this@DescriptionActivity,PaymentActivity::class.java)
             intent.putExtra("judul",tv_title.text.toString())
             intent.putExtra("owner",tv_owner_poster.text.toString())
             intent.putExtra("harga", tv_harga.text.toString())
+            intent.putExtra("harga", tv_harga.text.toString())
+            intent.putExtra("owner_poster", data?.owner_poster.toString())
+
+            val courseList: MutableList<SubCourse> = ArrayList()
+            val valueEventListener: ValueEventListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val subcourse: SubCourse? = ds.getValue(SubCourse::class.java)
+                        if (subcourse != null) {
+                            courseList.add(subcourse)
+                        }
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.d(String(), databaseError.message) //Don't ignore errors!
+                }
+            }
+
+            mDatabase.child(tv_title.text.toString()).child("list").addValueEventListener(valueEventListener)
+            intent.putExtra("total_video", courseList.size.toString())
+
+            Toast.makeText(this, courseList.size.toString(), Toast.LENGTH_LONG).show()
+            print(courseList.size.toString())
+
             startActivity(intent)
         }
 

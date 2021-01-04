@@ -1,15 +1,25 @@
 package com.example.kurditing
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.kurditing.model.SubCourse
 import com.example.kurditing.utils.Preferences
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_description.*
 import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.android.synthetic.main.activity_payment.iv_back
+import kotlinx.android.synthetic.main.activity_payment.iv_poster
+import kotlinx.android.synthetic.main.activity_payment.tv_harga
+
 
 class PaymentActivity : AppCompatActivity() {
 
@@ -19,9 +29,18 @@ class PaymentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
 
+        preferences = Preferences(this)
+
         tv_judul.text = intent.getStringExtra("judul")
         tv_owner.text = intent.getStringExtra("owner")
         tv_harga.text = intent.getStringExtra("harga")
+        tv_jumlah_video.text = intent.getStringExtra("total_video")
+        Glide.with(this)
+                .load(intent.getStringExtra("owner_poster"))
+                .apply(RequestOptions.circleCropTransform())
+                .into(iv_poster)
+
+        tv_saldo.text = preferences.getValues("saldo").toString()
 
         iv_back.setOnClickListener(){
             finish()

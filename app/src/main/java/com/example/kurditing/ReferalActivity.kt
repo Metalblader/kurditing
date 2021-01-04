@@ -20,7 +20,7 @@ class ReferalActivity : AppCompatActivity() {
         iv_back.setOnClickListener(){
             finish();
         }
-        btn_ajak_teman.setOnClickListener(){
+        btn_ambil_kelas.setOnClickListener(){
             ShareCompat.IntentBuilder
                 .from(this)
                 .setType("text/plain")

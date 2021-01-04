@@ -94,7 +94,7 @@
                     android:text="Terdapat"
                     android:textColor="@color/colorPurpleBlack"
                     android:textSize="13sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toEndOf="@+id/iv_poster"
                     app:layout_constraintTop_toBottomOf="@+id/tv_owner" />
 
                 <TextView
@@ -108,7 +108,7 @@
                     android:text="Trik Melesatkan Omset"
                     android:textColor="@color/colorPurpleBlack"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toEndOf="@+id/iv_poster"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -120,7 +120,7 @@
                     android:fontFamily="@font/poppins"
                     android:textColor="@color/colorGreySearchText"
                     android:textSize="13sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toEndOf="@+id/iv_poster"
                     app:layout_constraintTop_toBottomOf="@+id/tv_judul"
                     tools:text="Gilbert Herlambang" />
 
@@ -147,7 +147,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toEndOf="@+id/iv_poster"
                     app:layout_constraintTop_toBottomOf="@+id/textView18"
                     app:srcCompat="@drawable/ic_play" />
 
@@ -179,7 +179,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/iv_poster"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="24dp"
@@ -212,10 +212,23 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="IDR 199.000"
                 android:textColor="@color/colorPurpleBlack"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/radioButton"
+                tools:text="199.000" />
+
+            <TextView
+                android:id="@+id/tvidr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="IDR"
+                android:textColor="@color/colorPurpleBlack"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tv_saldo"
                 app:layout_constraintTop_toTopOf="@+id/radioButton" />
 
             <TextView
@@ -288,7 +301,7 @@
             android:background="?android:attr/listDivider" />
 
         <Button
-            android:id="@+id/btn_ajak_teman"
+            android:id="@+id/btn_ambil_kelas"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"

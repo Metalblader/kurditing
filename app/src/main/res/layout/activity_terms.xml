@@ -113,6 +113,7 @@
                 android:justificationMode="inter_word"
                 android:text="Kode Verifikasi (kode OTP) \nKode OTP akan dikirimkan melalui Layanan Pesan Singkat (Short Messaging Service / SMS) ke nomor telepon terdaftar ketika Pengguna Kurditing membuat akun Kurditing baru, masuk ke Aplikasi Kurditing, atau menghubungkan akun Kurditing dengan aplikasi Partner Kurditing. Pengguna Kurditing wajib menjaga kerahasiaan kode OTP dan tidak membagikan kode OTP kepada siapa pun. "
                 android:textColor="@color/colorPurpleBlack"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView42" />
