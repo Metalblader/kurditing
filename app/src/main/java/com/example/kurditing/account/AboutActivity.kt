@@ -1,10 +1,8 @@
-package com.example.kurditing
+package com.example.kurditing.account
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.activity_terms.*
+import com.example.kurditing.R
 import kotlinx.android.synthetic.main.activity_terms.iv_back
 
 class AboutActivity : AppCompatActivity() {
