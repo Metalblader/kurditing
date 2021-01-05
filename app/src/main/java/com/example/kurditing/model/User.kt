@@ -1,4 +1,4 @@
-package com.example.kurditing
+package com.example.kurditing.model
 
 class User {
     var uid: String ?=""

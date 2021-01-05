@@ -30,6 +30,7 @@ class DescriptionActivity : AppCompatActivity() {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Course")
 //                .child(data?.judul.toString())
+//                .child("list")
 
         tv_title.text = data?.judul
         tv_desc.text = data?.desc
@@ -50,7 +51,7 @@ class DescriptionActivity : AppCompatActivity() {
             intent.putExtra("harga", tv_harga.text.toString())
             intent.putExtra("owner_poster", data?.owner_poster.toString())
 
-            val courseList: MutableList<SubCourse> = ArrayList()
+            val courseList: ArrayList<SubCourse> = ArrayList()
             val valueEventListener: ValueEventListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (ds in dataSnapshot.children) {
@@ -59,6 +60,9 @@ class DescriptionActivity : AppCompatActivity() {
                             courseList.add(subcourse)
                         }
                     }
+                    intent.putExtra("total_video", courseList.size.toString())
+                    startActivity(intent)
+                    Toast.makeText(this@DescriptionActivity, courseList.size.toString(), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -67,12 +71,8 @@ class DescriptionActivity : AppCompatActivity() {
             }
 
             mDatabase.child(tv_title.text.toString()).child("list").addValueEventListener(valueEventListener)
-            intent.putExtra("total_video", courseList.size.toString())
 
-            Toast.makeText(this, courseList.size.toString(), Toast.LENGTH_LONG).show()
-            print(courseList.size.toString())
 
-            startActivity(intent)
         }
 
         btn_nonton_cuplikan.setOnClickListener(){

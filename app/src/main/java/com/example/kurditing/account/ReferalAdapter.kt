@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.kurditing.R
 import com.example.kurditing.model.Referal
 
-class ReferalAdapter(private var data: List<Referal>,
-                     private var listener:(Referal) -> Unit)
+class ReferalAdapter(private var data: List<String>,
+                     private var listener:(String) -> Unit)
     : RecyclerView.Adapter<ReferalAdapter.ViewHolder>() {
 
     lateinit var contextAdapter: Context
@@ -37,8 +37,8 @@ class ReferalAdapter(private var data: List<Referal>,
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         private val tvReferal: TextView = view.findViewById(R.id.tv_referal)
 
-        fun bindItem(data:Referal, listener: (Referal) -> Unit, context: Context){
-            tvReferal.setText(data.uid)
+        fun bindItem(data:String, listener: (String) -> Unit, context: Context){
+            tvReferal.setText(data)
 
             itemView.setOnClickListener(){
                 listener(data)

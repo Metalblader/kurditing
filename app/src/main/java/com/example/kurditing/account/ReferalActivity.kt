@@ -4,25 +4,19 @@ import android.R.attr.label
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kurditing.DescriptionActivity
 import com.example.kurditing.R
-import com.example.kurditing.home.dashboard.BestSellerAdapter
-import com.example.kurditing.home.dashboard.PopularAdapter
-import com.example.kurditing.model.Course
-import com.example.kurditing.model.Referal
+import com.example.kurditing.model.User
 import com.example.kurditing.utils.Preferences
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.activity_referal.*
 import kotlinx.android.synthetic.main.activity_referal.btn_ambil_kelas
 import kotlinx.android.synthetic.main.activity_terms.iv_back
-import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class ReferalActivity : AppCompatActivity() {
@@ -30,7 +24,8 @@ class ReferalActivity : AppCompatActivity() {
     private lateinit var preferences: Preferences
     private lateinit var mDatabase : DatabaseReference
 
-    private var dataList = ArrayList<Referal>()
+    private var dataList = ArrayList<String>()
+    val referalList: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +34,7 @@ class ReferalActivity : AppCompatActivity() {
         preferences = Preferences(this)
         mDatabase = FirebaseDatabase.getInstance().getReference("user")
                 .child(preferences.getValues("uid").toString())
+                .child("referal")
 
         iv_back.setOnClickListener(){
             finish();
@@ -59,9 +55,67 @@ class ReferalActivity : AppCompatActivity() {
             Toast.makeText(this@ReferalActivity, "Link Berhasil Disalin", Toast.LENGTH_LONG).show()
         }
 
+        val valueEventListener: ValueEventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    val subReferal: String? = ds.key
+                    if (subReferal != null) {
+                        referalList.add(subReferal)
+                    }
+                }
+
+                dataList.clear()
+                val valuesEventListener: ValueEventListener = object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val user: User? = dataSnapshot.getValue(User::class.java)
+                        if (user != null) {
+                            dataList.add(user.nama.toString())
+                        }
+                        rv_referal.adapter = ReferalAdapter(dataList){}
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        Log.d(String(), databaseError.message) //Don't ignore errors!
+                    }
+                }
+
+                referalList.forEach {
+                    var mDB = FirebaseDatabase.getInstance().getReference("user").child(it)
+                    mDB.addValueEventListener(valuesEventListener)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d(String(), databaseError.message) //Don't ignore errors!
+            }
+        }
+
+        mDatabase.addValueEventListener(valueEventListener)
+//        val valuesEventListener: ValueEventListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                val user: User? = dataSnapshot.getValue(User::class.java)
+//                if (user != null) {
+//                    dataList.add(user.nama.toString())
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                Log.d(String(), databaseError.message) //Don't ignore errors!
+//            }
+//        }
+
+//        mDatabase.addValueEventListener(valueEventListener)
+
+//        referalList.forEach {
+//            var mDatabase = FirebaseDatabase.getInstance().getReference("user").child(it)
+//            mDatabase.addValueEventListener(valuesEventListener)
+//        }
+
+
+
         rv_referal.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        getData()
+//        getData()
     }
 
     private fun getData() {
@@ -71,12 +125,6 @@ class ReferalActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataList.clear()
-                for (getdataSnapshot in dataSnapshot.children){
-                    var referal = getdataSnapshot.getValue(Referal::class.java)
-                    dataList.add(referal!!)
-                }
-
                 rv_referal.adapter = ReferalAdapter(dataList){
                 }
             }

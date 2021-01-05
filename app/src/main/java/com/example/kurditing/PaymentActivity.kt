@@ -34,7 +34,7 @@ class PaymentActivity : AppCompatActivity() {
         tv_judul.text = intent.getStringExtra("judul")
         tv_owner.text = intent.getStringExtra("owner")
         tv_harga.text = intent.getStringExtra("harga")
-        tv_jumlah_video.text = intent.getStringExtra("total_video")
+        tv_jumlah_video.text = intent.getStringExtra("total_video") + " Video"
         Glide.with(this)
                 .load(intent.getStringExtra("owner_poster"))
                 .apply(RequestOptions.circleCropTransform())
