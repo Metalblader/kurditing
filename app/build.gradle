@@ -60,4 +60,7 @@ dependencies {
     }
 
     implementation 'com.android.support:multidex:1.0.3'
+
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:7.1.1'
 }
