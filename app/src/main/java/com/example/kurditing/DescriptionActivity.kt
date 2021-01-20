@@ -16,11 +16,13 @@ import kotlinx.android.synthetic.main.activity_description.btn_ambil_kelas
 import kotlinx.android.synthetic.main.activity_description.iv_poster
 import kotlinx.android.synthetic.main.activity_description.tv_harga
 import kotlinx.android.synthetic.main.activity_payment.*
+import java.text.DecimalFormat
 
 class DescriptionActivity : AppCompatActivity() {
 
     private lateinit var mDatabase: DatabaseReference
     private var dataList = ArrayList<Detail>()
+    val dec = DecimalFormat("#,###")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +34,10 @@ class DescriptionActivity : AppCompatActivity() {
 //                .child(data?.judul.toString())
 //                .child("list")
 
+        var harga = (data?.harga)?.toDouble()
         tv_title.text = data?.judul
         tv_desc.text = data?.desc
-        tv_harga.text = "IDR "+data?.harga
+        tv_harga.text = dec.format(harga)
         tv_rating.text = data?.rating
         tv_owner_poster.text = data?.owner
 
@@ -47,8 +50,7 @@ class DescriptionActivity : AppCompatActivity() {
             var intent = Intent(this@DescriptionActivity,PaymentActivity::class.java)
             intent.putExtra("judul",tv_title.text.toString())
             intent.putExtra("owner",tv_owner_poster.text.toString())
-            intent.putExtra("harga", tv_harga.text.toString())
-            intent.putExtra("harga", tv_harga.text.toString())
+            intent.putExtra("harga", (data?.harga).toString())
             intent.putExtra("owner_poster", data?.owner_poster.toString())
 
             val courseList: ArrayList<SubCourse> = ArrayList()
@@ -62,7 +64,6 @@ class DescriptionActivity : AppCompatActivity() {
                     }
                     intent.putExtra("total_video", courseList.size.toString())
                     startActivity(intent)
-                    Toast.makeText(this@DescriptionActivity, courseList.size.toString(), Toast.LENGTH_LONG).show()
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

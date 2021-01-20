@@ -112,16 +112,31 @@
                 android:id="@+id/tv_harga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/colorPurpleBlack"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_harga2"
                 app:layout_constraintTop_toBottomOf="@+id/tv_desc"
-                tools:text="IDR 199.000" />
+                tools:text="199.000" />
+
+            <TextView
+                android:id="@+id/tv_harga2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="IDR"
+                android:textColor="@color/colorPurpleBlack"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
 
             <TextView
                 android:id="@+id/tv_rating"

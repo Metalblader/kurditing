@@ -1,24 +1,20 @@
 package com.example.kurditing
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.kurditing.model.SubCourse
 import com.example.kurditing.utils.Preferences
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_description.*
 import kotlinx.android.synthetic.main.activity_payment.*
-import kotlinx.android.synthetic.main.activity_payment.iv_back
-import kotlinx.android.synthetic.main.activity_payment.iv_poster
-import kotlinx.android.synthetic.main.activity_payment.tv_harga
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
 
 
 class PaymentActivity : AppCompatActivity() {
@@ -30,24 +26,35 @@ class PaymentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_payment)
 
         preferences = Preferences(this)
+        val dec = DecimalFormat("#,###")
 
         tv_judul.text = intent.getStringExtra("judul")
         tv_owner.text = intent.getStringExtra("owner")
-        tv_harga.text = intent.getStringExtra("harga")
+        tv_harga.text = "IDR " + dec.format(intent.getStringExtra("harga")?.toDouble())
         tv_jumlah_video.text = intent.getStringExtra("total_video") + " Video"
         Glide.with(this)
                 .load(intent.getStringExtra("owner_poster"))
                 .apply(RequestOptions.circleCropTransform())
                 .into(iv_poster)
 
-        tv_saldo.text = preferences.getValues("saldo").toString()
+        var saldo = dec.format(preferences.getValues("saldo")?.toDouble())
+        tv_saldo.text = saldo.toString()
 
         iv_back.setOnClickListener(){
             finish()
         }
+
+        btn_beli_kelas.setOnClickListener(){
+            if(radioButton.isChecked){
+                getCustomDialog()
+            }else{
+                Toast.makeText(this,"Anda belum memilih metode pembayaran",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
-    fun getCustomDialog(view: View) {
+
+    fun getCustomDialog() {
         var MyLayout = layoutInflater.inflate(R.layout.activity_custom_dialog,null)
         val myDialogBuilder = AlertDialog.Builder(this).apply {
             setView(MyLayout)
@@ -55,8 +62,18 @@ class PaymentActivity : AppCompatActivity() {
         }
         var myDialog : AlertDialog = myDialogBuilder.create()
         var cancel = MyLayout.findViewById<ImageView>(R.id.iv_cancel)
+        var seeClass = MyLayout.findViewById<Button>(R.id.btn_lihat_kelas)
         cancel.setOnClickListener(){
             myDialog.cancel()
+        }
+        seeClass.setOnClickListener(){
+//            var intent = Intent(this, CourseFragment::class.java)
+//            startActivity(intent)
+//            getSupportFragmentManager()
+//                .beginTransaction()
+//                    .replace(R.id.courseFragment, )
+//                .commit();
+
         }
 //        var ID = MyLayout.findViewById<EditText>(R.id.UserID)
 //        var Pass = MyLayout.findViewById<EditText>(R.id.UserPass)
@@ -68,7 +85,16 @@ class PaymentActivity : AppCompatActivity() {
 //                Toast.makeText(this,"Login Gagal", Toast.LENGTH_SHORT).show()
 //            myDialog.cancel()
 //        }
+        var cekSaldo = preferences.getValues("saldo")?.toInt()
+        var cekHarga = intent.getStringExtra("harga")?.toInt()
+        if(cekSaldo!! >= cekHarga!!){
+            myDialog.show()
+        }
+    }
 
-        myDialog.show()
+    fun rupiah(number: Double): String{
+        val localeID =  Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return numberFormat.format(number).toString()
     }
 }
