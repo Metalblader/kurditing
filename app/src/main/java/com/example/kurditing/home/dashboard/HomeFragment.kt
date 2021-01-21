@@ -76,7 +76,6 @@ class HomeFragment : Fragment() {
         preferences = Preferences(requireActivity().applicationContext)
         mDatabase = FirebaseDatabase.getInstance().getReference("Course")
 
-        Toast.makeText(context, "Nama Home: " + preferences.getValues("nama"), Toast.LENGTH_LONG).show()
 
         tv_nama.text = preferences.getValues("nama")
 

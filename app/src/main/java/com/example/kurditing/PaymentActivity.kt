@@ -1,15 +1,20 @@
 package com.example.kurditing
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.kurditing.home.HomeActivity
+import com.example.kurditing.mycourse.CourseFragment
 import com.example.kurditing.utils.Preferences
 import kotlinx.android.synthetic.main.activity_payment.*
 import java.text.DecimalFormat
@@ -66,13 +71,14 @@ class PaymentActivity : AppCompatActivity() {
         cancel.setOnClickListener(){
             myDialog.cancel()
         }
+
         seeClass.setOnClickListener(){
-//            var intent = Intent(this, CourseFragment::class.java)
-//            startActivity(intent)
-//            getSupportFragmentManager()
-//                .beginTransaction()
-//                    .replace(R.id.courseFragment, )
-//                .commit();
+            var intent = Intent(this, HomeActivity::class.java)
+            intent.putExtra("course","course")
+            startActivity(intent)
+
+
+            finishAffinity()
 
         }
 //        var ID = MyLayout.findViewById<EditText>(R.id.UserID)
