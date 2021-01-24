@@ -130,6 +130,7 @@
                 android:fontFamily="@font/poppins"
                 android:text=" "
                 android:textColor="@color/colorPurpleBlack"
+                android:textSize="24sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView32"
                 app:layout_constraintStart_toEndOf="@+id/textView32"
                 tools:text="Wilson Angga" />

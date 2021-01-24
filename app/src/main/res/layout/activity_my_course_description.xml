@@ -38,8 +38,7 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/colorPurpleBlack"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_poster"
                 tools:text="Trik Melesatkan Omset" />
@@ -80,6 +79,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="Daftar Video"
                 android:textColor="@color/colorPurpleBlack"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
 
