@@ -53,6 +53,13 @@ class SignInActivity : AppCompatActivity() {
 //            myRef.setValue("Hello, World!")
 //        }
 
+        if (preferences.getValues("status").equals("1")) {
+            finishAffinity()
+
+            val intent = Intent(this@SignInActivity, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
         btn_masuk.setOnClickListener {
             email = et_email.text.toString()
             password = et_password.text.toString()

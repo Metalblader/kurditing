@@ -1,19 +1,22 @@
 package com.example.kurditing.home.dashboard
 
+import android.R.attr.minHeight
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.kurditing.DescriptionActivity
 import com.example.kurditing.R
 import com.example.kurditing.model.Course
 import com.example.kurditing.utils.Preferences
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,6 +87,30 @@ class HomeFragment : Fragment() {
         rv_continue_watching.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         getData()
+
+        var minHeight1 = 0
+        var minHeight2 = 0
+        rv_best_seller.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val newHeight = recyclerView.measuredHeight
+                if (newHeight != 0 && newHeight > minHeight1) {
+                    minHeight1 = newHeight
+                    recyclerView.minimumHeight = minHeight1
+                }
+            }
+        })
+
+        rv_popular.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val newHeight = recyclerView.measuredHeight
+                if (newHeight != 0 && newHeight > minHeight2) {
+                    minHeight2 = newHeight
+                    recyclerView.minimumHeight = minHeight2
+                }
+            }
+        })
     }
 
     private fun getData() {

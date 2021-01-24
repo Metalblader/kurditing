@@ -111,7 +111,7 @@ class SearchFragment : Fragment() {
                     // Firebase Retrieve
 
                     val query = ss
-                    Toast.makeText(context, ss, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, ss, Toast.LENGTH_SHORT).show()
                     var filteredList = ArrayList<Course>()
                     for (course in dataList) {
                         if (course.judul!!.contains(query, ignoreCase = true)) {

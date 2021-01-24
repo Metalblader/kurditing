@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kurditing.R
 import com.example.kurditing.model.Course
+import java.text.DecimalFormat
 
 class SearchAdapter(private var data: List<Course>,
                     private val listener: (Course) -> Unit) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
@@ -43,7 +44,9 @@ class SearchAdapter(private var data: List<Course>,
             tvTitle.text = data.judul
             tvOwner.text = data.owner
             tvRating.text = data.rating
-            tvHarga.text = data.harga
+
+            val dec = DecimalFormat("#,###")
+            tvHarga.text = "IDR " + dec.format(data.harga?.toDouble())
 
             Glide.with(context)
                     .load(data.poster)

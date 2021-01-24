@@ -82,9 +82,10 @@ class AccountFragment : Fragment() {
                 myDialog.cancel()
             }
             logout.setOnClickListener(){
+                preferences.setValues("status", "0")
                 var intent = Intent(context, SignInActivity::class.java)
                 startActivity(intent)
-                getActivity()?.finish();
+                activity?.finish()
             }
             myDialog.show()
         }
