@@ -12,7 +12,7 @@ import com.example.kurditing.model.Detail
 import com.example.kurditing.model.SubCourse
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_description.*
-import kotlinx.android.synthetic.main.activity_description.btn_ambil_kelas
+import kotlinx.android.synthetic.main.activity_description.btn_ajak_teman
 import kotlinx.android.synthetic.main.activity_description.iv_poster
 import kotlinx.android.synthetic.main.activity_description.tv_harga
 import kotlinx.android.synthetic.main.activity_payment.*
@@ -46,7 +46,7 @@ class DescriptionActivity : AppCompatActivity() {
                 .load(data?.poster)
                 .into(iv_poster)
 
-        btn_ambil_kelas.setOnClickListener(){
+        btn_ajak_teman.setOnClickListener(){
             var intent = Intent(this@DescriptionActivity,PaymentActivity::class.java)
             intent.putExtra("judul",tv_title.text.toString())
             intent.putExtra("owner",tv_owner_poster.text.toString())

@@ -18,8 +18,10 @@ import com.example.kurditing.model.Course
 import com.google.firebase.database.*
 
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search_category.*
 import kotlinx.android.synthetic.main.fragment_search_result.*
 
+private const val EXTRA_STATUS = "EXTRA_STATUS"
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,66 +61,61 @@ class SearchFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        if (savedInstanceState != null) {
+            et_search.setText(savedInstanceState.getString(EXTRA_STATUS) ?: "Kosong")
+//            Log.i("debug", status.text.toString())
+        }
+
         database = FirebaseDatabase.getInstance().getReference("Course")
         getData()
-//        searchAdapter = SearchAdapter()
 
+        // pembentukan objek fragment dari SearchCategoryFragment
         val fragmentSearchCategory = SearchCategoryFragment()
+        // pembentukan objek fragment dari SearchResultFragment
         val fragmentSearchResult = SearchResultFragment()
 
-//        resultList = childFragmentManager.findFragmentById(R.id.parent)!!.rv_search_result
-
-
+        // tampilkan fragmentSearchCategory pada awal tampilan SearchFragment
         setFragment(fragmentSearchCategory)
 
+        // pembuatan objek bundle untuk pengiriman data ke fragmentSearchResult
+        var bundle = Bundle()
+
+        // menambahkan textchangedlistener pada edit text et_search yang bertujuan melacak perubahan
+        // ketika mengetik pada search box
         et_search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                var ss = s!!.trim()
-//                if (ss.isEmpty()) {
-//                    setFragment(fragmentSearchCategory)
-//                } else {
-//                    setFragment(fragmentSearchResult)
-//                    // Firebase Retrieve
-//
-////                    firebaseCourseSearch(ss.toString())
-////                    val fragment = childFragmentManager.findFragmentById(R.id.parent)
-////                    val fragment = childFragmentManager.getFragment()
-////                    fragment.et_search
-//
-//
-//                    val query = ss
-//                    var filteredList = ArrayList<Course>()
-//                    for (course in dataList) {
-//                        if (course.judul!!.contains(query, ignoreCase = true)) {
-//                            filteredList.add(course)
-//                        }
-//                    }
-//
-//                    fragmentSearchResult.search(filteredList)
-//                }
             }
 
             override fun afterTextChanged(s: Editable?) {
+                // ambil string pada et_search dengan membuang spasi tambahan pada awal dan akhir string
                 var ss = s!!.trim()
+                // jika string empty maka sedang dalam keadaan tidak melakukan search maka tampilkan fragmentSearchCategory
                 if (ss.isEmpty()) {
                     setFragment(fragmentSearchCategory)
-                } else {
-                    setFragment(fragmentSearchResult)
-                    // Firebase Retrieve
+                } else { // dalam keadaan search
+                    // masukkan string search pada bundle dengan key "SEARCH_TERM"
+                    bundle.putString("SEARCH_TERM", "Search result for $ss")
+                    // berikan nilai arguments pada fragmentSearchResult dengan objek bundle
+                    fragmentSearchResult.arguments = bundle
 
+                    // kemudian tampilkan fragmentSearchResult
+                    setFragment(fragmentSearchResult)
+
+                    // query hanya untuk penamaan, sebenarnya sama saja nilainya dengan ss
                     val query = ss
-//                    Toast.makeText(context, ss, Toast.LENGTH_SHORT).show()
+                    // filteredList untuk menampung kursus yang tlah difilter berdasarkan string search
                     var filteredList = ArrayList<Course>()
+                    // lakukan pengecekan
                     for (course in dataList) {
                         if (course.judul!!.contains(query, ignoreCase = true)) {
                             filteredList.add(course)
                         }
                     }
 
+                    // fungsi search merupakan fungsi custom untuk mengupdate recycler view
                     fragmentSearchResult.search(filteredList)
                 }
             }
@@ -128,6 +125,11 @@ class SearchFragment : Fragment() {
         btn_cancel.setOnClickListener {
             et_search.setText("")
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EXTRA_STATUS, et_search.text.toString())
     }
 
 //    private fun fetch() {
