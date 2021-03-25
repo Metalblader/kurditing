@@ -2,11 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kurditing">
 
+    <!-- permission INTERNET diperlukan untuk melakukan request melalui internet -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- permission ACCESS_NETWORK_STATE digunakan untuk melakukan cek terhadap status koneksi internet -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,42 +19,62 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kurditing.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".VideoPlayingActivity" android:configChanges="orientation|screenSize"></activity>
+        <!-- pada MyNetworkReceiver set nilai atribut enabled ke true agar dapat digunakan dalam sistem, kemudian
+          atribut exported ke nilai true agar dapat menerima broadcast dari sumber di luar aplikasi -->
+        <receiver
+            android:name=".MyNetworkReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <!-- pembuatan intent-filter dengan action android.net.conn.CONNECTIVITY_CHANGE untuk mendeteksi
+             perubahan status koneksi internet -->
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".VideoPlayingActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".mycourse.MyCourseDescriptionActivity" />
         <activity android:name=".MyCourseActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".SignInActivity">
-<!--             <intent-filter>-->
-<!--                 <action android:name="android.intent.action.MAIN" />-->
-<!--                 <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".SignUpActivity"/>
-<!--        <activity android:name=".SignUpActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>-->
+        <activity android:name=".SignUpActivity" /> <!-- <activity android:name=".SignUpActivity" android:windowSoftInputMode="stateHidden|adjustResize"/> -->
         <activity android:name=".account.AccountActivity" />
         <activity android:name=".DescriptionActivity" />
-        <activity android:name=".home.HomeActivity" android:windowSoftInputMode="adjustPan">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity
+            android:name=".home.HomeActivity"
+            android:windowSoftInputMode="adjustPan">
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".account.TermsActivity"/>
-        <activity android:name=".account.AboutActivity"/>
-        <activity android:name=".account.ReferalActivity"/>
-        <activity android:name=".PaymentActivity"/>
+        <activity android:name=".account.TermsActivity" />
+        <activity android:name=".account.AboutActivity" />
+        <activity android:name=".account.ReferalActivity" />
+        <activity android:name=".PaymentActivity" />
     </application>
 
 </manifest>
