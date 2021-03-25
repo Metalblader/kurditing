@@ -1,8 +1,10 @@
 package com.example.kurditing
 
 import android.app.ActivityManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -83,6 +85,12 @@ class DescriptionActivity : AppCompatActivity() {
 
         }
 
+
+        // inisialisi intent filter
+        var filterPlayer = IntentFilter(ACTION_STOP)
+        // mendaftarkan reciver dengan filterPlayer sebagai intentfilter
+        registerReceiver(mediaPlayerReceiver,filterPlayer)
+
         // inisialisasi service
         var myService = Intent(this, MyService::class.java)
         // fungsi ketika tombol btnAudio diklik
@@ -107,8 +115,24 @@ class DescriptionActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
     }
 
+    // membuat receiver berupa objek yang menginherit class broadcastreceiver
+    private val mediaPlayerReceiver = object : BroadcastReceiver(){
+        // fungsi yang dijalankan ketika broadcast diterima
+        override fun onReceive(context: Context?, intent: Intent?) {
+            // inisialisasi variabel untuk menerima EXTRA_FINISH dari intent
+            var finish = intent?.getBooleanExtra(EXTRA_FINISH,false)
+            // pengecekan isi variable yang telah dibuat, jika sudah selesai maka dijalankan
+            if(finish!!){
+                // menyembunyikan tombol btnAudioStop
+                btnAudioStop.setVisibility(View.INVISIBLE)
+                Toast.makeText(context,"Audio Telah Selesai",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
 
     private fun getData() {
         mDatabase.addValueEventListener(object : ValueEventListener {
