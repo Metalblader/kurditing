@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.IBinder
 import android.provider.Settings
+import androidx.core.app.JobIntentService
 
 class MyService : Service() {
     //inisialisasi variabel mediaplayer
@@ -27,6 +28,13 @@ class MyService : Service() {
         // menjalankan media player dan memutar audio
         mediaPlayer.start()
         // untuk membuat dan menjalankan kembali service setelah fungsi onStartCommand dijalankan dan service sudah dimatikan (kill).
+
+        mediaPlayer.setOnCompletionListener {
+            var intent = Intent(this,DescriptionActivity::class.java)
+            intent.putExtra("EXTRA_FINISH", true)
+            sendBroadcast(intent)
+        }
+
         return START_STICKY
     }
 
