@@ -25,19 +25,19 @@ class HomeActivity : AppCompatActivity(), MyNetworkReceiver.NetworkReceiverListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        // laukan inisialisasi bottom navigation view bersasarkan view pada file xml (disini saya namakan id-nya bnv)
         val bnv = bnv
+        // pembuatan navController sebagai pengatur navigasi (disini R.id.fragment pada file xml merupakan
+        // sebuah NavHostFragment
         val navController = findNavController(R.id.fragment)
 
+        // lakukan set up NavController berdasarkan variabel navController yang telah dibuat untuk
+        // sinkronisasi antara bottomNavigationView dengan navController
         bnv.setupWithNavController(navController)
 
         var cek = intent.getStringExtra("course")
         if(cek == "course"){
             navController.navigate(R.id.courseFragment)
-//            supportFragmentManager.commit {
-//                replace<CourseFragment>(R.id.fragment)
-//                setReorderingAllowed(true)
-//                addToBackStack("name") // name can be null
-//            }
         }
 
         // assign nilai this pada companion object networkReceiverListener yang sebelumnya dibuat pada
