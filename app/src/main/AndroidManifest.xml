@@ -28,6 +28,9 @@
             android:exported="true"
             android:stopWithTask="true" />
 
+        <!-- daftarkan MyReceiver pada AndroidManifest.xml -->
+        <receiver android:name=".MyReceiver"/>
+
         <activity
             android:name=".VideoPlayingActivity"
             android:configChanges="orientation|screenSize" />
@@ -53,12 +56,12 @@
             android:name=".home.HomeActivity"
             android:windowSoftInputMode="adjustPan">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
