@@ -17,6 +17,15 @@
         android:theme="@style/Theme.Kurditing.NoActionBar"
         android:usesCleartextTraffic="true">
         <!--
+            1. inisialisasi nama receiver
+            2. memberi izin pada receiver
+            3. broadcast receiver dapat menerima event dari aplikasi sendiri atau aplikasi lain
+        -->
+        <receiver
+            android:name=".MyAlarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <!--
             1. inisialisasi nama service
             2. memberi izin pada service
             3. broadcast receiver dapat menerima event dari aplikasi sendiri atau aplikasi lain
