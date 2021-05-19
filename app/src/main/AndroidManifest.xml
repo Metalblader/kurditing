@@ -23,6 +23,15 @@
         <activity android:name=".ReferenceActivity"></activity>
         <activity android:name=".JokeActivity" />
         <!--
+            1. inisialisasi nama receiver
+            2. memberi izin pada receiver
+            3. broadcast receiver dapat menerima event dari aplikasi sendiri atau aplikasi lain
+        -->
+        <receiver
+            android:name=".MyAlarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <!--
             1. inisialisasi nama service
             2. memberi izin pada service
             3. broadcast receiver dapat menerima event dari aplikasi sendiri atau aplikasi lain
@@ -81,6 +90,7 @@
              </intent-filter>
         </activity>
         <activity android:name=".account.TermsActivity" />
+        <activity android:name=".account.HistoryTransActivity" />
         <activity android:name=".account.AboutActivity" />
         <activity android:name=".account.ReferalActivity" />
         <activity android:name=".PaymentActivity" />
