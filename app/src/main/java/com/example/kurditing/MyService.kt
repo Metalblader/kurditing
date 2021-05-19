@@ -23,7 +23,7 @@ class MyService : Service() {
     // fungsi yang dijalankan saat service dijalankan
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         //inisialisasi link audio
-        val audioPath = "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/audio%2FFading%20Lights%20Animasi%20Hitung%20Mundur%2010%20Detik.mp3?alt=media&token=a5ec65de-e5c6-4452-bea5-052363250a6a"
+        val audioPath = "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/audio%2Fhow_to_figure_out_what_to_do_with_your_life_439104475844874328.mp3?alt=media&token=b9019f4a-6dc3-4cd3-bea6-c0d7eb35cb02"
 
         // mengubah link audio menjadi uri
         val uri: Uri = Uri.parse(audioPath)

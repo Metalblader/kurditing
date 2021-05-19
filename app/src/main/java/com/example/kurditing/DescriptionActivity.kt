@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_payment.*
 import java.text.DecimalFormat
 
 
-class DescriptionActivity : AppCompatActivity() {
+class  DescriptionActivity : AppCompatActivity() {
 
     private lateinit var mDatabase: DatabaseReference
     private var dataList = ArrayList<Detail>()
