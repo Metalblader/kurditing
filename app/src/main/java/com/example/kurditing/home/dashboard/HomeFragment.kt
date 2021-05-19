@@ -81,13 +81,15 @@ class HomeFragment : Fragment(), HomeInterface {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // ambil data preference dari context aplikasi
+        // ambil data preference sesuai context aplikasi
         preferences = Preferences(requireActivity().applicationContext)
-        // ambil reference dari FirebaseDatabase untuk keperluan fetching data
-        mDatabase = FirebaseDatabase.getInstance().getReference("Course")
 
         // set teks pada tv_nama sesuai dengan data nama pada preferences
         tv_nama.text = preferences.getValues("nama")
+
+        // ambil reference dari FirebaseDatabase untuk keperluan fetching data
+        mDatabase = FirebaseDatabase.getInstance().getReference("Course")
+
 
         // lakukan assignment layout manager dari rcycler view
         rv_best_seller.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
