@@ -225,7 +225,7 @@
                 android:layout_marginLeft="56dp"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
-                android:text="@string/tentang_kurditing"
+                android:text="@string/riwayat_transaksi"
                 android:textColor="@color/colorPurpleBlack"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

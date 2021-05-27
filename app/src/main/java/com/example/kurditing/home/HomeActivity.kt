@@ -1,17 +1,22 @@
 package com.example.kurditing.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
 import com.example.kurditing.R
+import com.example.kurditing.account.MyDBRoomHelper2
 import com.example.kurditing.home.dashboard.HomeFragment
 import com.example.kurditing.model.Course
 import com.example.kurditing.mycourse.CourseFragment
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_account.*
+import org.jetbrains.anko.doAsync
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +38,6 @@ class HomeActivity : AppCompatActivity() {
 //                addToBackStack("name") // name can be null
 //            }
         }
-
     }
 
 }
