@@ -54,7 +54,7 @@ class AccountFragment : Fragment() {
 
         var db= Room.databaseBuilder(
             requireActivity().applicationContext,
-            MyDBRoomHelper2::class.java,
+            MyDBRoomHelper::class.java,
             "kurditing.db"
         ).build()
 

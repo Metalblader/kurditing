@@ -23,29 +23,24 @@ class HistoryTransActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history_trans)
 
-        btn_simpan_trans.setOnClickListener{
-            // menjalankan fungsi writeFileInternal saat tombol btn_simpan_trans diklik
-//            writeFileInternal();
-            var db2= Room.databaseBuilder(
-                this,
-                MyDBRoomHelper2::class.java,
-                "kurditing.db"
-            ).build()
-            doAsync {
-                var historyTmp = UserName(123)
-                historyTmp.name = "Wilson Angga"
-                db2.usernameDAO().insertAll(historyTmp)
-                uiThread {
-                    Log.w("Hasil DB", "berhasil")
-                }
-            }
-        }
-
         var db= Room.databaseBuilder(
             this,
             MyDBRoomHelper::class.java,
             "kurditing.db"
         ).build()
+
+        btn_simpan_trans.setOnClickListener{
+            // menjalankan fungsi writeFileInternal saat tombol btn_simpan_trans diklik
+//            writeFileInternal();
+            doAsync {
+                var historyTmp = UserName(123)
+                historyTmp.name = "Wilson Angga"
+                db.usernameDAO().insertAll(historyTmp)
+                uiThread {
+                    Log.w("Hasil DB", "berhasil")
+                }
+            }
+        }
 
         btn_lihat_trans.setOnClickListener{
             // menjalankan fungsi readFileInternal saat tombol btn_lihat_trans diklik
