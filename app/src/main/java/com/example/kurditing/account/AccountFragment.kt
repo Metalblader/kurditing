@@ -52,17 +52,18 @@ class AccountFragment : Fragment() {
 //        tv_nama.text = preferences.getValues("nama")
 
 
-        var db= Room.databaseBuilder(
-            requireActivity().applicationContext,
-            MyDBRoomHelper::class.java,
-            "kurditing.db"
-        ).build()
+
 
         doAsync {
+            var db= Room.databaseBuilder(
+                requireActivity().applicationContext,
+                MyDBRoomHelper::class.java,
+                "kurditing.db"
+            ).build()
+            
             db.usernameDAO().getAllData().forEach{
                 tv_nama.setText(it.name)
             }
-            Log.w("jancok", db.usernameDAO().getAllData().toString())
         }
 
         btn_referal.setOnClickListener(){
