@@ -62,7 +62,6 @@ class CommentAdapter(private var data: List<Comment>) : RecyclerView.Adapter<Com
                     etMyComment.keyListener = null
                     etMyComment.setBackgroundResource(R.drawable.edit_text_comment_disabled)
                     etMyComment.setPadding(0)
-
                 }
             }
         }
