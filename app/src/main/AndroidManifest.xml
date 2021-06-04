@@ -3,6 +3,8 @@
     package="com.example.kurditing">
     <permission android:name="com.example.kurditing.provider.READ_URI_DB"
         android:protectionLevel="normal"/>
+    <permission android:name="com.example.kurditing.provider.WRITE_URI_DB"
+        android:protectionLevel="normal"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
@@ -101,10 +103,11 @@
         <activity android:name=".PaymentActivity" />
         <provider
             android:authorities="com.example.kurditing.provider.provider.myContentProvider"
-            android:name=".provider.MyContentProvider"
+            android:name=".provider.myContentProvider"
             android:enabled="true"
             android:exported="true"
             android:readPermission="com.example.kurditing.provider.READ_URI_DB"
+            android:writePermission="com.example.kurditing.provider.WRITE_URI_DB"
             android:grantUriPermissions="true"/>
     </application>
 

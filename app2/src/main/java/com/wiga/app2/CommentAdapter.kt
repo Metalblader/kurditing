@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 
-class CommentAdapter(private var data: List<Comment>) : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
+class CommentAdapter(private var activity: MainActivity, private var data: List<Comment>) : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
     lateinit var contextAdapter: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentAdapter.ViewHolder {
