@@ -16,8 +16,8 @@ class myDBHelper(context:Context) : SQLiteOpenHelper(context, DATABASE_NAME,null
 
     override fun onCreate(db: SQLiteDatabase?) {
         var CREATE_COMMENT_TABLE = "CREATE TABLE ${commentDB.commentTable.TABLE_COMMENT}" +
-                "(${commentDB.commentTable.COLUMN_ID} INTEGER PRIMARY KEY, "
-                "${commentDB.commentTable.COLUMN_COMMENT} TEXT,"
+                "(${commentDB.commentTable.COLUMN_ID} INTEGER PRIMARY KEY, " +
+                "${commentDB.commentTable.COLUMN_COMMENT} TEXT," +
                 "${commentDB.commentTable.COLUMN_USERNAME} TEXT)"
         db?.execSQL(CREATE_COMMENT_TABLE)
     }
@@ -34,7 +34,7 @@ class myDBHelper(context:Context) : SQLiteOpenHelper(context, DATABASE_NAME,null
             put(commentDB.commentTable.COLUMN_USERNAME, comment.username)
         }
         var success= db.insert(commentDB.commentTable.TABLE_COMMENT, null, contentValues)
-        db.close()
+//        db.close()
         return success
     }
 
