@@ -21,7 +21,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kurditing.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReferenceActivity"></activity>
+        <activity
+            android:name=".account.EditProfileActivity"
+            android:label="@string/title_activity_edit_profile"
+            android:theme="@style/Theme.Kurditing.NoActionBar.NoActionBar"></activity>
+        <activity android:name=".ReferenceActivity" />
         <activity android:name=".JokeActivity" />
         <!--
             1. inisialisasi nama receiver
@@ -31,7 +35,7 @@
         <receiver
             android:name=".MyAlarmReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
         <!--
             1. inisialisasi nama service
             2. memberi izin pada service
@@ -71,17 +75,10 @@
         </activity>
         <activity android:name=".SignUpActivity" /> <!-- <activity android:name=".SignUpActivity" android:windowSoftInputMode="stateHidden|adjustResize"/> -->
         <activity android:name=".account.AccountActivity" />
-        <activity android:name=".DescriptionActivity" />
+        <activity android:name=".description.DescriptionActivity" />
         <activity
             android:name=".home.HomeActivity"
             android:windowSoftInputMode="adjustPan">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-        <activity android:name=".SplashScreenActivity">
 
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
@@ -89,6 +86,13 @@
 
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
+        </activity>
+        <activity android:name=".SplashScreenActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".account.TermsActivity" />
         <activity android:name=".account.HistoryTransActivity" />

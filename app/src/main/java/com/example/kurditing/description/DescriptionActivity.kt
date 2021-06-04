@@ -1,4 +1,4 @@
-package com.example.kurditing
+package com.example.kurditing.description
 
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -14,7 +14,11 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.kurditing.*
+import com.example.kurditing.R
+import com.example.kurditing.model.Comment
 import com.example.kurditing.model.Course
 import com.example.kurditing.model.Detail
 import com.example.kurditing.model.SubCourse
@@ -25,11 +29,16 @@ import kotlinx.android.synthetic.main.activity_description.tv_harga
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.notification_expanded.*
 import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DescriptionActivity : AppCompatActivity() {
     private lateinit var mDatabase: DatabaseReference
     private var dataList = ArrayList<Detail>()
+    private var commentList: ArrayList<Comment> = arrayListOf(Comment("Lina", "Buat Lu yang pengen ngembangin akun Instagram dengan cara full Organik (tanpa iklan, tanpa FU, tanpa tools)", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fal%201.png?alt=media&token=7007628a-8d74-42ee-ac13-a375223241e6"),
+            Comment("Astuti", "Materinya lengkap, penyampaian mudah dimengerti, informatif sekali!", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fcl%201.png?alt=media&token=5ed4fa77-de7f-4ff7-a54c-1a0dcbb10810"),
+            Comment("Asep", "Materinya mudah dipahami dan ada update materi juga manteb banget", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Frk%201.png?alt=media&token=e661920d-c15a-4723-98e7-0f3a24d1b0d2"))
     val dec = DecimalFormat("#,###")
 
     // pada DescriptionActivity deklarasikan notificationManager dan inisialisasikan dengan nilai null
@@ -137,6 +146,9 @@ class DescriptionActivity : AppCompatActivity() {
             intent.putExtra("data", data)
             startActivity(intent)
         }
+
+        rv_comment.layoutManager = LinearLayoutManager(this)
+        rv_comment.adapter = CommentAdapter(commentList)
     }
 
     // fungsi showNotification dengan sebuah parameter title untuk menampilkan notification
