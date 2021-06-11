@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.database.Cursor
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +29,8 @@ import kotlinx.android.synthetic.main.activity_description.iv_poster
 import kotlinx.android.synthetic.main.activity_description.tv_harga
 import kotlinx.android.synthetic.main.activity_payment.*
 import kotlinx.android.synthetic.main.notification_expanded.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -36,9 +39,16 @@ import kotlin.collections.ArrayList
 class DescriptionActivity : AppCompatActivity() {
     private lateinit var mDatabase: DatabaseReference
     private var dataList = ArrayList<Detail>()
-    private var commentList: ArrayList<Comment> = arrayListOf(Comment("Lina", "Buat Lu yang pengen ngembangin akun Instagram dengan cara full Organik (tanpa iklan, tanpa FU, tanpa tools)", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fal%201.png?alt=media&token=7007628a-8d74-42ee-ac13-a375223241e6"),
-            Comment("Astuti", "Materinya lengkap, penyampaian mudah dimengerti, informatif sekali!", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fcl%201.png?alt=media&token=5ed4fa77-de7f-4ff7-a54c-1a0dcbb10810"),
-            Comment("Asep", "Materinya mudah dipahami dan ada update materi juga manteb banget", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Frk%201.png?alt=media&token=e661920d-c15a-4723-98e7-0f3a24d1b0d2"))
+    // inisialisasi commentList dengan nilai dummy data berisi 3 buah data
+    private var commentList = ArrayList<Comment>()
+//    private var commentList: ArrayList<Comment> = arrayListOf(Comment(0,"Lina", "Buat Lu yang pengen ngembangin akun Instagram dengan cara full Organik (tanpa iklan, tanpa FU, tanpa tools)", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fal%201.png?alt=media&token=7007628a-8d74-42ee-ac13-a375223241e6"),
+//            Comment(1, "Astuti", "Materinya lengkap, penyampaian mudah dimengerti, informatif sekali!", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fcl%201.png?alt=media&token=5ed4fa77-de7f-4ff7-a54c-1a0dcbb10810"),
+//            Comment(2, "Asep", "Materinya mudah dipahami dan ada update materi juga manteb banget", "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Frk%201.png?alt=media&token=e661920d-c15a-4723-98e7-0f3a24d1b0d2"))
+    // inisialisasi mySQLitedb dengan nilai null
+    var mySQLitedb : myDBHelper? = null
+    // inisialisasi commentAdapter dengan nilai null
+    var commentAdapter: CommentAdapter? = null
+
     val dec = DecimalFormat("#,###")
 
     // pada DescriptionActivity deklarasikan notificationManager dan inisialisasikan dengan nilai null
@@ -48,6 +58,48 @@ class DescriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_description)
+
+        // lakukan assignment terhadap mySQLitedb
+        mySQLitedb = myDBHelper(this)
+        // panggil fungsi executeLoadDataTransaction
+//        executeLoadDataTransaction()
+        // panggil fungsi loadComment
+        loadComment()
+
+        // lakukan posting comment ketika btn_posting diklik
+        btn_posting.setOnClickListener {
+            // tampung teks dari et_comment ke dalam variabel text
+            val text = et_comment.text.toString()
+            // hapus teks dari et_comment
+            et_comment.setText("")
+            // lakukan secara asynchronous
+            doAsync {
+                // inisialisasi myComment dengan nilai dari comment yang kita ketikkan beserta nama dan profile,
+                // di sini nama dan profile berupa nilai hardcode untuk memudahkan operasi
+                val myComment = Comment(commentList.size, "Wilson Angga", text, "https://firebasestorage.googleapis.com/v0/b/kurditing.appspot.com/o/images%2Fpejabat.jpg?alt=media&token=f00e8397-049f-4c86-89d3-279a245c8b8e")
+                // panggil fungsi addComment
+                mySQLitedb?.addComment(myComment)
+                // tambahkan comment ke dalam commentList
+                commentList.add(myComment)
+                // notifyDataSetChanged pada adapater recycler view
+                commentAdapter?.notifyDataSetChanged()
+            }
+        }
+//        doAsync {
+//            mySQLitedb?.beginCommentTransaction()
+//            for(commentData in commentList){
+//                mySQLitedb?.addCommentTransaction(commentData)
+//                uiThread {
+//                    Toast.makeText(applicationContext, "EXECUTE", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            mySQLitedb?.successCommentTransaction()
+//            mySQLitedb?.endCommentTransaction()
+//            uiThread {
+//                finishThisActivity()
+//            }
+//        }
+//        executeLoadDataTransaction()
 
         // lakukan assignment pada notificationManager dengan notification system service
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -96,7 +148,7 @@ class DescriptionActivity : AppCompatActivity() {
             }
 
             mDatabase.child(tv_title.text.toString()).child("list").addValueEventListener(
-                valueEventListener
+                    valueEventListener
             )
         }
 
@@ -148,7 +200,58 @@ class DescriptionActivity : AppCompatActivity() {
         }
 
         rv_comment.layoutManager = LinearLayoutManager(this)
-        rv_comment.adapter = CommentAdapter(commentList)
+//        rv_comment.adapter = CommentAdapter(commentList)
+    }
+
+    // fungsi loadComment untuk menampung semua comment yang ada pada database ke dalam commentList
+    fun loadComment(){
+        // lakukan secara asynchronous
+        doAsync {
+            // inisialisasi cursor dengan hasil return dari pemanggilan method radAllComment
+            val cursor: Cursor? = mySQLitedb?.readAllComment()
+            // cek jika berisi data
+            if (cursor?.count != 0) {
+                // lakukan perulangan terhadap cursor dan tambahkan ke dalam commentList
+                while (cursor?.moveToNext() == true) {
+                    val comment = Comment(cursor.getInt(0),
+                            cursor.getString(2),
+                            cursor.getString(1),
+                            cursor.getString(3))
+                    commentList.add(comment)
+                }
+            }
+
+            // set nilai commentAdapter
+            commentAdapter = CommentAdapter(commentList, mySQLitedb!!)
+            uiThread {
+                // kemudian set nilai adapter dari rv_comment dengan nilai commentAdapter
+                rv_comment.adapter = commentAdapter
+            }
+        }
+    }
+
+    // fungsi untuk menambah data secara transactional
+    private fun executeLoadDataTransaction() {
+        // lakukan secara asynchronous
+        doAsync {
+            // mulai transaction
+            mySQLitedb?.beginCommentTransaction()
+            // lakukan perulangan terhadap setiap commentData dalam commentList
+            // masukkan ke dalam database
+            for(commentData in commentList) {
+                mySQLitedb?.addCommentTransaction(commentData)
+            }
+            // set transaction sukses
+            mySQLitedb?.successCommentTransaction()
+            // akhiri transaction
+            mySQLitedb?.endCommentTransaction()
+        }
+    }
+
+    private fun finishThisActivity() {
+//        var myFirstRunSharedPref = FirstRunSharedPref(this)
+//        myFirstRunSharedPref.firstRun = false
+        this.finish()
     }
 
     // fungsi showNotification dengan sebuah parameter title untuk menampilkan notification
@@ -199,7 +302,7 @@ class DescriptionActivity : AppCompatActivity() {
         mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@DescriptionActivity, "" + error.message, Toast.LENGTH_LONG)
-                    .show()
+                        .show()
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -213,5 +316,10 @@ class DescriptionActivity : AppCompatActivity() {
 
     fun backHome(view: View) {
         finish();
+    }
+
+    override fun onDestroy() {
+//        mySQLitedb?.close()
+        super.onDestroy()
     }
 }
