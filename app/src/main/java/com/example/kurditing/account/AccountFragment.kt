@@ -88,10 +88,10 @@ class AccountFragment : Fragment() {
 
         // ketika btn_bebas_iklan diklik, tampilkan toast yang menunjukkan telah bebas iklan, kemudian
         // setValues dari preference dengan key ads menjadi "false"
-        btn_bebas_iklan.setOnClickListener {
-            Toast.makeText(context, "Selamat! Kamu bebas iklan selamanya", Toast.LENGTH_SHORT).show()
-            preferences.setValues("ads", "false")
-        }
+//        btn_bebas_iklan.setOnClickListener {
+//            Toast.makeText(context, "Selamat! Kamu bebas iklan selamanya", Toast.LENGTH_SHORT).show()
+//            preferences.setValues("ads", "false")
+//        }
 
         // ketika tv_edit_profile diklik, lakukan launch intent ke EditProfileActivity
         tv_edit_profile.setOnClickListener {
@@ -113,10 +113,10 @@ class AccountFragment : Fragment() {
             startActivity(intent)
         }
 
-        btn_historyTrans.setOnClickListener{
-            var intent = Intent(context, HistoryTransActivity::class.java)
-            startActivity(intent)
-        }
+//        btn_historyTrans.setOnClickListener{
+//            var intent = Intent(context, HistoryTransActivity::class.java)
+//            startActivity(intent)
+//        }
 
         btn_logout.setOnClickListener(){
             var MyLayout = layoutInflater.inflate(R.layout.activity_logout_dialog,null)
@@ -149,10 +149,10 @@ class AccountFragment : Fragment() {
                 .apply(RequestOptions.circleCropTransform())
                 .into(iv_photo)
 
-        btn_undi.setOnClickListener {
-            val intent = Intent(context, ReferenceActivity::class.java)
-            startActivity(intent)
-        }
+//        btn_undi.setOnClickListener {
+//            val intent = Intent(context, ReferenceActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
     override fun onCreateView(
