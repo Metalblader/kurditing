@@ -21,6 +21,11 @@
         android:theme="@style/Theme.Kurditing.NoActionBar"
         android:usesCleartextTraffic="true">
 
+        <!-- meta-data berisi app id admob -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1291187334064991~6170246703"/>
+
         <!-- pendaftaran receiver untuk BestSellerWidget disertai intent filter dan meta-data -->
         <receiver android:name=".BestSellerWidget">
             <intent-filter>

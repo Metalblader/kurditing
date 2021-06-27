@@ -72,7 +72,7 @@ class AccountFragment : Fragment() {
 
         preferences = Preferences(requireActivity().applicationContext)
 
-//        tv_nama.text = preferences.getValues("nama")
+        tv_nama.text = preferences.getValues("nama")
 
         // assign nilai db dengan memanggil method getInstance dari MyDBRoomHelper
         db = MyDBRoomHelper.getInstance(requireActivity().applicationContext)
@@ -80,10 +80,17 @@ class AccountFragment : Fragment() {
         // lakukan query getAllData secara asynchronous untuk set nilai tv_nama
         // sebenarnya query getAllData tidak cocok untuk kasus ini, karena seharusnya hanya query
         // satu user, query di bawah hanya demonstrasi saja
-        doAsync {
-            db.usernameDAO().getAllData().forEach{
-                tv_nama.text = it.name
-            }
+//        doAsync {
+//            db.usernameDAO().getAllData().forEach{
+//                tv_nama.text = it.name
+//            }
+//        }
+
+        // ketika btn_bebas_iklan diklik, tampilkan toast yang menunjukkan telah bebas iklan, kemudian
+        // setValues dari preference dengan key ads menjadi "false"
+        btn_bebas_iklan.setOnClickListener {
+            Toast.makeText(context, "Selamat! Kamu bebas iklan selamanya", Toast.LENGTH_SHORT).show()
+            preferences.setValues("ads", "false")
         }
 
         // ketika tv_edit_profile diklik, lakukan launch intent ke EditProfileActivity
