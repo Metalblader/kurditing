@@ -19,9 +19,12 @@ import kotlinx.android.synthetic.main.activity_payment.*
 import java.text.DecimalFormat
 
 class DescriptionActivity : AppCompatActivity() {
-
+    // deklarasi firebase database reference
     private lateinit var mDatabase: DatabaseReference
+    // deklarasi dan assign dataList dengan array list kosong
     private var dataList = ArrayList<Detail>()
+
+
     val dec = DecimalFormat("#,###")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +34,7 @@ class DescriptionActivity : AppCompatActivity() {
         val data = intent.getParcelableExtra<Course>("data")
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Course")
-//                .child(data?.judul.toString())
-//                .child("list")
+
 
         var harga = (data?.harga)?.toDouble()
         tv_title.text = data?.judul

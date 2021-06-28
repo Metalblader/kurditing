@@ -32,10 +32,12 @@ class CourseFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var preferences: Preferences
-    private lateinit var database: DatabaseReference
-//    private lateinit var databaseCourse: DatabaseReference
 
+    // deklarasi firebase database reference
+    private lateinit var database: DatabaseReference
+    // deklarasi dan assign dataList dengan array list kosong
     var dataList = ArrayList<Course>()
+
     lateinit var uid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,35 +61,34 @@ class CourseFragment : Fragment() {
 
         preferences = Preferences(requireActivity().applicationContext)
         uid = preferences.getValues("uid")!!
-//        database = FirebaseDatabase.getInstance().getReference("user").child(uid!!).child("kursus")
+
+        // assign reference dengan path "Course" dari firebase database
         database = FirebaseDatabase.getInstance().getReference("Course")
 
-//        Glide.with(this)
-//            .load(preferences.getValues("url"))
-//            .apply(RequestOptions.circleCropTransform())
-//            .into(iv_poster)
-
+        // set layout manager dari rv_my_course dengan LinearLayoutManager
         rv_my_course.layoutManager = LinearLayoutManager(context)
 
+        // panggil fungsi getData()
         getData()
     }
 
     private fun getData() {
+        // addValueEventListener pada DatabaseReference database
         database.addValueEventListener(object : ValueEventListener {
+            // method onDataChange akan dipanggil ketika pertama kali diakses serta ketika terjadi
+            // perubahan pada database reference
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
+                // clear datalist
                 dataList.clear()
+                // tampung dataSnapshot ke dalam dataList
                 for (getdataSnapshot in dataSnapshot.children) {
                     val course = getdataSnapshot.getValue(Course::class.java)
-//                    val ok = getdataSnapshot.child("members").child(uid).value == true
-//                    val cid = getdataSnapshot.key
-//                    val course =
-//                    if (ok) {
-//                        dataList.add(course!!)
-//                    }
                     dataList.add(course!!)
                 }
 
+                // passing dataList sebagai data yang akan ditampilkan ke dalam rv_my_course
+                // disertai dengan click listener (berupa intent dengan extra) yang akan berpindah activity menuju
+                // MyCourseDescriptionActivity
                 rv_my_course.adapter = CourseAdapter(dataList) {
                     val intent = Intent(context,
                         MyCourseDescriptionActivity::class.java).putExtra("data", it)
@@ -96,6 +97,7 @@ class CourseFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
+                // jika terjadi failed pada listener, tampilkan toast dengan pesan error
                 Toast.makeText(context, ""+error.message, Toast.LENGTH_LONG).show()
             }
         })

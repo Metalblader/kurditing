@@ -31,8 +31,10 @@ private const val ARG_PARAM2 = "param2"
 class HomeFragment : Fragment() {
 
     private lateinit var preferences: Preferences
-    private lateinit var mDatabase : DatabaseReference
 
+    // deklarasi firebase database reference
+    private lateinit var mDatabase : DatabaseReference
+    // deklarasi dan assign dataList dengan array list kosong
     private var dataList = ArrayList<Course>()
 
     // TODO: Rename and change types of parameters
@@ -77,15 +79,18 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         preferences = Preferences(requireActivity().applicationContext)
-        mDatabase = FirebaseDatabase.getInstance().getReference("Course")
-
-
         tv_nama.text = preferences.getValues("nama")
 
+
+
+        // assign reference dengan path "Course" dari firebase database
+        mDatabase = FirebaseDatabase.getInstance().getReference("Course")
+
+        // set layout manager dari rv_best_seller dan rv_popular dengan LinearLayoutManager
         rv_best_seller.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rv_popular.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        rv_continue_watching.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+        // panggil fungsi getData() untuk mengisi data yang akan ditampilkan pada recycler view
         getData()
 
         var minHeight1 = 0
@@ -114,18 +119,27 @@ class HomeFragment : Fragment() {
     }
 
     private fun getData() {
+        // addValueEventListener pada DatabaseReference mDatabase
         mDatabase.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(databaseError: DatabaseError) {
+                // jika terjadi failed pada listener, tampilkan toast dengan pesan error
                 Toast.makeText(context, ""+databaseError.message, Toast.LENGTH_SHORT).show()
             }
 
+            // method onDataChange akan dipanggil ketika pertama kali diakses serta ketika terjadi
+            // perubahan pada database reference
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // clear datalist
                 dataList.clear()
+                // tampung dataSnapshot ke dalam dataList
                 for (getdataSnapshot in dataSnapshot.children){
                     var course = getdataSnapshot.getValue(Course::class.java)
                     dataList.add(course!!)
                 }
 
+                // passing dataList sebagai data yang akan ditampilkan ke dalam rv_best_seller dan rv_popular
+                // (dalam kasus ini keduanya menampilkan ada yang sama agar lebih simple)
+                // disertai dengan click listener (berupa intent dengan extra) yang akan berpindah activity menuju DescriptionActivity
                 rv_best_seller.adapter = BestSellerAdapter(dataList){
                     var intent = Intent(context, DescriptionActivity::class.java).putExtra("data",it)
                     startActivity(intent)
@@ -135,10 +149,6 @@ class HomeFragment : Fragment() {
                     var intent = Intent(context, DescriptionActivity::class.java).putExtra("data",it)
                     startActivity(intent)
                 }
-//
-//                rv_continue_watching.adapter = ContinueWatchingAdapter(dataList){
-//
-//                }
             }
 
         })

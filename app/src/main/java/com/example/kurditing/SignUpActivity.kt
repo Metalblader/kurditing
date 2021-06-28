@@ -29,14 +29,17 @@ import kotlinx.android.synthetic.main.activity_sign_up.tv_akun
 
 
 class SignUpActivity : AppCompatActivity() {
-
+    // deklarasi variabel nama, email, password, dan cPassword
     private lateinit var nama: String
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var cPassword: String
 
+    // deklarasi preferences
     private lateinit var preferences: Preferences
+    // deklarasi firebase database reference
     private lateinit var database: DatabaseReference
+    // deklarasi firebase auth
     private lateinit var auth: FirebaseAuth
 
     companion object {
@@ -48,23 +51,27 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
+        // tampung reference firebase database ke dalam variabel database
         database = FirebaseDatabase.getInstance().reference
+        // tampung instance firebase auth
         auth = FirebaseAuth.getInstance()
-
+        // assign preference berdasarkan context aplikasi
         preferences = Preferences(this)
 
         setSpanText()
 
+        // ketika btn_daftar diklik
         btn_daftar.setOnClickListener{
+            // tampung teks nama, email, password, dan cPassword ke dalam variabel
             nama = et_nama.text.toString()
             email = et_email.text.toString()
             password = et_password.text.toString()
             cPassword = et_confirm_password.text.toString()
 
+            // percabangan berikut hanya untuk pengecekan value dari edit text
             if(TextUtils.isEmpty(nama)) {
                 et_nama.error = "Silahkan isi nama Anda"
                 et_nama.requestFocus()
-//                Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_LONG).show()
             }
             else if (TextUtils.isEmpty(email)) {
                 et_nama.error = "Silahkan isi email Anda"
@@ -83,24 +90,30 @@ class SignUpActivity : AppCompatActivity() {
                 et_confirm_password.requestFocus()
             }
             else {
+                // jika sudah memenuhi syarat, maka lakukan sign up menggunakan firebase auth
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        // jika berhasil, tampilkan toast berhasil login
                         Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
 
+                        // panggil fungsi onAuthSuccess
                         onAuthSuccess(task.result?.user)
 
+                        // deklarasi variabel user
                         var user: User?
+                        // variabel uid menunjukkan uid user saat ini
                         val uid = auth.currentUser!!.uid
-
-//                        Toast.makeText(this, "UID: " + uid, Toast.LENGTH_LONG).show()
-
+                        // tampung reference child bernilai uid dari child "user" dari database reference yang telah
+                        // dideklarasikan
                         val uidRef = database.child("user").child(uid)
+
+                        // buat valueEventListener pada
                         val valueEventListener = object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                // tampung value user dari firebase database
                                 user = dataSnapshot.getValue(User::class.java)
 
-//                                Toast.makeText(this@SignUpActivity, "Nama IN: " + user?.nama.toString(), Toast.LENGTH_LONG).show()
-
+                                // set atribut dari user ke dalam preferences
                                 preferences.setValues("uid", user?.uid.toString())
                                 preferences.setValues("nama", user?.nama.toString())
                                 preferences.setValues("email", user?.email.toString())
@@ -108,23 +121,25 @@ class SignUpActivity : AppCompatActivity() {
                                 preferences.setValues("saldo", user?.saldo.toString())
                                 preferences.setValues("status", "1")
 
+                                // panggil finishAffinity() untuk mengakhiri activity ini dan activity di bawahnya
+                                // pada stack
                                 finishAffinity()
 
+                                // pembuatan intent ke HomeActivity
                                 val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
+                                // jalankan activity dengan argumen intent
                                 startActivity(intent)
                             }
 
                             override fun onCancelled(databaseError: DatabaseError) {
+                                // ketika terjadi pembatalan, lakukan logging pesan error
                                 Log.d(TAG, databaseError.message)
                             }
                         }
+                        // tambahkan valueEventListener pada uidRef
                         uidRef.addValueEventListener(valueEventListener)
-
-//                        Toast.makeText(this, "Nama: " + user?.nama.toString(), Toast.LENGTH_LONG).show()
-
-
-//                        finish()
                     } else {
+                        // jika task tidak sukses, maka tampilkan toast dengan pesan login failed
                         Toast.makeText(this, "Registration Failed: " + (task.exception?.message
                                 ?: "NULL"), Toast.LENGTH_LONG).show()
                     }
@@ -133,15 +148,13 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    // fungsi onAuthSuccess yang memanggil fungsi writeNewUser dengan argumen uid, nama, email, password
     private fun onAuthSuccess(user: FirebaseUser?) {
-//        val username: String = usernameFromEmail(user.email)
-
         writeNewUser(user!!.uid, nama, email, password)
-
-//        startActivity(Intent(this@AdminLoginActivity, MainActivity::class.java))
-//        finish()
     }
 
+    // fungsi writeNewUser berfungsi untuk menambahkan user pada firebase realtime database, yaitu
+    // pada path "user"
     private fun writeNewUser(userId: String, nama: String, email: String, password: String) {
         val user = User()
         user.uid = userId
@@ -153,6 +166,7 @@ class SignUpActivity : AppCompatActivity() {
         database.child("user").child(userId).setValue(user)
     }
 
+    // fungsi utility untuk pengecekan email menggunakan class Patterns
     private fun isEmailValid(email: CharSequence?): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }

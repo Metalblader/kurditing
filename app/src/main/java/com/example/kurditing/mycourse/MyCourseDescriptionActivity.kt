@@ -21,7 +21,9 @@ import kotlinx.android.synthetic.main.fragment_course.*
 
 class MyCourseDescriptionActivity : AppCompatActivity() {
 
+    // deklarasi firebase database reference
     private lateinit var database: DatabaseReference
+    // deklarasi dan assign dataList dengan array list kosong
     private var dataList = ArrayList<Course>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +32,6 @@ class MyCourseDescriptionActivity : AppCompatActivity() {
 
         val data = intent.getParcelableExtra<Course>("data")
 
-        database = FirebaseDatabase.getInstance().getReference("Course").child(data?.judul!!).child("list")
-//                .child(data?.judul.toString())
-
         tv_title.text = data?.judul
         tv_desc.text = data?.desc
 
@@ -40,24 +39,38 @@ class MyCourseDescriptionActivity : AppCompatActivity() {
                 .load(data?.poster)
                 .into(iv_poster)
 
+        // assign reference dengan child bernilai data.judul dari child "list" dari path "Course" pada firebase database
+        database = FirebaseDatabase.getInstance().getReference("Course").child(data?.judul!!).child("list")
+
+        // set layout manager dari rv_daftar_video dengan LinearLayoutManager
         rv_daftar_video.layoutManager = LinearLayoutManager(this)
 
+        // panggil fungsi getData()
         getData()
     }
 
 
     private fun getData() {
+        // addValueEventListener pada DatabaseReference database
         database.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@MyCourseDescriptionActivity,""+error.message, Toast.LENGTH_LONG).show()
             }
 
+            // method onDataChange akan dipanggil ketika pertama kali diakses serta ketika terjadi
+            // perubahan pada database reference
             override fun onDataChange(snapshot: DataSnapshot) {
+                // clear datalist
+                dataList.clear()
+                // tampung dataSnapshot ke dalam dataList
                 for(getdataSnapshot in snapshot.children){
-                    var Course = getdataSnapshot.getValue(Course::class.java)
-                    dataList.add(Course!!)
+                    var course = getdataSnapshot.getValue(Course::class.java)
+                    dataList.add(course!!)
                 }
 
+                // passing dataList sebagai data yang akan ditampilkan ke dalam rv_daftar_video
+                // disertai dengan click listener (berupa intent) yang akan berpindah activity menuju
+                // VideoPlayingActivity
                 rv_daftar_video.adapter = CourseAdapter(dataList) {
                     val intent = Intent(this@MyCourseDescriptionActivity, VideoPlayingActivity::class.java)
                     startActivity(intent)
